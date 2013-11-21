@@ -1,0 +1,25 @@
+Device count: 1
+Device0: GeForce GTX 460 SE (1024 MB), CUDA capability: 2.1
+UVA: 1
+UVA - canMapHostMemory: 1
+DMA - asyncEngineCount: 1
+MAX BLOCKS NUMBER: 65535
+
+BLOCKS_NUMBER = 1, THREADS_NUMBER = 32
+
+DMA - copy by using DMA-controller (async in each direction)
+UVA - copy by using Unified Virtual Addressing and launch kernel-function once
+--------------------------------------------------------------------
+
+Alone DMA-async: memory copy H->D & D->H:
+DMA Memcpy async: iters = 40,    time: 7.199, bandwidth = 5556 MB/sec
+-----------------------------------------------------------------
+Alone UVA-ping: 1 byte copy H->D & D->H:
+UVA PING-PONG: iters = 3000000,          time: 9.015, ping = 3.005e-006 sec
+-----------------------------------------------------------------
+Overlaped DMA-async and UVA-ping:
+DMA Memcpy async: iters = 40,    time: 7.359, bandwidth = 5435 MB/sec
+UVA PING-PONG: iters = 3000000,          time: 12.103, ping = 4.03433e-006 sec
+-----------------------------------------------------------------
+Bandwidth for overlaped DMA with UVA slower than alone DMA in: 2.18 %
+In theory should be performance decrease,  bandwidth: 1.39 %
